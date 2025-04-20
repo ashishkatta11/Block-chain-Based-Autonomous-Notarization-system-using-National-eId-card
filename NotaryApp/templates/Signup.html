@@ -1,0 +1,315 @@
+{% load static %}
+<html>
+<head>
+    <title>Blockchain-Based Autonomous Notarization System Using National eID Card</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script>
+        function validateForm() {
+            const form = document.forms['signupForm'];
+            const username = form['username'].value.trim();
+            const password = form['password'].value;
+            const contact = form['contact'].value.trim();
+            const email = form['email'].value.trim();
+            const address = form['address'].value.trim();
+    
+            if (!username) {
+                alert("Please enter a username");
+                form['username'].focus();
+                return false;
+            }
+            if (!password || password.length < 8) {
+                alert("Password must be at least 8 characters");
+                form['password'].focus();
+                return false;
+            }
+            if (!contact || isNaN(contact) || contact.length < 10) {
+                alert("Please enter a valid contact number");
+                form['contact'].focus();
+                return false;
+            }
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address");
+                form['email'].focus();
+                return false;
+            }
+            if (!address) {
+                alert("Please enter an address");
+                form['address'].focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <script language="javascript" type="text/javascript" src="datetimepicker.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to bottom, #a2eaf5, #ace4fb,#b7e1e8, #daecf3, #daecf3, #daecf3, #daecf3, #f2f3f3, #f0f3f5, white, white, #f2f3f3, #f0f3f5, #daecf3, #daecf3,#b7e1e8, #ace4fb);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column;
+        }
+        nav a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 15px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #fff; 
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color:black;
+            color: #a2eaf5;
+            border-color: #a2eaf5;
+            transform: translateY(-5px);
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            width: 100%; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            color: #fff;
+            padding: 20px 0;
+            z-index: 10;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            height: 60px;
+            width: 80px; 
+            border-radius: 40%;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        header nav ul li a:hover {
+            color: rgb(130, 217, 241);
+            transform: translateY(-5px);
+        }
+        .id-text,
+        .vault-text {
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+        .id-text {
+            color: rgb(130, 217, 241);
+        }
+
+        .vault-text {
+            color: white;
+        }
+        /* Login Form Container */
+        .login-container {
+        display: flex;
+        width: 800px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        border-radius: 15px;
+        overflow: hidden;
+        margin-top: 20px; 
+        }
+
+        /* Left Side with Background Image */
+        .login-left {
+            background: url("{% static 'images/background.jpg' %}") no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            padding: 40px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .login-left h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        /* Right Side Form */
+        .login-right {
+            padding: 40px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-right h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .login-right input[type="text"],
+        .login-right input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .login-right input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: black;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-right input[type="submit"]:hover {
+            background-color: rgb(130, 217, 241);
+			color:black;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color:black;
+        }
+
+        .register-link a {
+            color:black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        .lmg {
+    background: url("{% static 'images/vbg.jpg' %}") no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80%;
+    min-height: 80%;
+}
+    </style>
+    <!-- Header Section -->
+    <header>
+    <div class="container">
+        <div class="logo-text">
+        <img src="{% static 'images/icon.png' %}" alt="Logo" class="logo">
+        <span class="id-text">ID</span><span class="vault-text">VAULT</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'VerifierLogin' %}">Verifier Login</a></li>
+                <li><a href="{% url 'Login' %}">User Login </a></li>
+                <li><a href="{% url 'Signup' %}">User Signup</a></li>
+            </ul>
+        </nav>
+    </div>
+    </header>
+</head>
+<body>
+
+<!-- Login Form -->
+<div class="login-container">
+    <!-- Left Side with Background Image -->
+    <div class="login-left">
+        <img src="{% static 'images/lmg.png' %}" alt="lmg" class="lmg">
+    </div>
+
+    <!-- Right Side Form -->
+    <div class="login-right">
+		<form name="signupForm" method="post" action="{% url 'SignupAction' %}" onsubmit="return validateForm();">
+            {% csrf_token %}
+            <h2>User Signup</h2>
+            <input type="text" name="username" placeholder="Username" autofocus />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="text" name="contact" placeholder="Contact No" />
+            <input type="text" name="email" placeholder="Email ID" />
+            <input type="text" name="address" placeholder="Address" />
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember" />
+                <label for="remember">Remember me</label>
+            </div>
+            
+            <input type="submit" value="SIGN UP" />
+        </form>
+	</div>
+	
+</div>
+
+</body>
+</html>

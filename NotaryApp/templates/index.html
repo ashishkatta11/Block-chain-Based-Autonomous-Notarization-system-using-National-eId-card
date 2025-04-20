@@ -1,0 +1,311 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blockchain Based Autonomous Notarization System Using National eID Card</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: linear-gradient(to bottom,  #a2eaf5, #a2eaf5,#a2eaf5, #a2eaf5, #a2eaf5, #a2eaf5, #a2eaf5, #a2eaf5, #ace4fb,#b7e1e8, #daecf3, #daecf3, #daecf3, #daecf3, #f2f3f3, #f0f3f5,white, white, #f2f3f3, #f0f3f5, #daecf3, #daecf3,#b7e1e8, #ace4fb);
+        }
+        nav a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 15px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #fff; 
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color:black;
+            color: #a2eaf5;
+            border-color: #a2eaf5;
+            transform: translateY(-5px);
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background-color:black;
+            color: #f8fafa;
+            padding: 20px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            height: 60px;
+            width: 80px; 
+            border-radius: 40%;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+
+        }
+
+        header nav ul li a:hover {
+            color: rgb(130, 217, 241);
+            transform: translateY(-5px);
+            
+        }
+        .id-text,
+        .vault-text {
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+        .id-text {
+            color: rgb(130, 217, 241);
+        }
+
+        .vault-text {
+            color: white;
+        }
+        /* Hero Section */
+        .hero {
+            background: url("{% static 'images/open.jpg' %}") no-repeat center center/cover;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0));
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0));
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            background-position: center;
+            width:100%;
+            height:670px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            margin-bottom: 40px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 60px;
+        }
+
+        .hero .btn {
+            background: black;
+            color: #fff;
+            padding: 8px 28px;
+            border: 2px solid #000;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            transition: background 0.3s;
+            border-radius: 5px;
+        }
+
+        .hero .btn:hover {
+            background: rgb(130, 217, 241);
+            color:black;
+            border: 2px solid #000;
+        }
+
+        /* About Section */
+        #about {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        #about img {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        /* Services Section */
+        #services {
+            background: #f4f4f4;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .services-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .service-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(248, 249, 249, 0.1);
+            width: 30%;
+            transition: transform 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            outline: none;
+        }
+
+        form button {
+            background: black;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: black;
+        }
+
+        /* Footer */
+        footer {
+            background: black;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+          <div class="logo-text">
+          <img src="{% static 'images/icon.png' %}" alt="Logo" class="logo">
+          <span class="id-text">ID</span><span class="vault-text">VAULT</span>
+          </div>
+          <nav>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'VerifierLogin' %}">Verifier Login</a></li>
+                    <li><a href="{% url 'Login' %}">User Login </a></li>
+                    <li><a href="{% url 'Signup' %}">User Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 style="color:white">Welcome to IDVAULT</h1>
+            <p style="color:white">Secure Verified Trusted</p>
+            <a href="#services" class="btn">Explore More</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are a team of passionate developers building amazing web applications with Django.</p>
+            <img src="{% static 'images/header_images.jpg' %}" alt="About Us">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-list">
+                <div class="service-item">
+                    <h3>Identity Verification</h3>
+                    <p>Securely verifies the user's identity using the national eID card and blockchain-based authentication to prevent identity fraud.</p>
+                </div>
+                <div class="service-item">
+                    <h3>Document Notarization </h3>
+                    <p>Allows users to digitally notarize documents by recording them on the blockchain, ensuring immutability and authenticity. </p>
+                </div>
+                <div class="service-item">
+                    <h3>Audit and Verification</h3>
+                    <p>Provides a transparent, tamper-proof log of all notarized documents for easy auditing and verification through blockchain records.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>Blockchain Based Autonomous Notarization System Using National eID Card</p>
+        </div>
+    </footer>
+
+</body>
+</html>

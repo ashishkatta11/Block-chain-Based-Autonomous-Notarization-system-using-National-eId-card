@@ -1,0 +1,258 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain Notarization - Add Notary</title>
+    <meta charset="utf-8" />
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            margin: 0;
+			padding: 20px; 
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom, #a2eaf5, #ace4fb,#b7e1e8, #daecf3, #daecf3, #daecf3, #daecf3, #f2f3f3, #f0f3f5, white, white, #f2f3f3, #f0f3f5, #daecf3, #daecf3,#b7e1e8, #ace4fb);
+			box-sizing: border-box;
+        }
+       /* Header */
+	   header {
+            width: 100%; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            color: #fff;
+            padding: 20px 0;
+            z-index: 10;
+			box-sizing: border-box;
+        }
+
+        header .topcontainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+			padding: 0 20px; 
+        }
+
+        header .logo {
+            height: 60px;
+            width: 80px; 
+            border-radius: 40%;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 20px;
+        }
+        
+        header nav ul li a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 15px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            background-color:black;
+            color: #a2eaf5;
+            border-color: #a2eaf5;
+            transform: translateY(-5px);
+        }
+        .id-text,
+        .vault-text {
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+        .id-text {
+            color: rgb(130, 217, 241);
+        }
+
+        .vault-text {
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            margin: 120px auto 50px auto; 
+            padding: 30px;
+            box-sizing: border-box;  
+            border-radius: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea, input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        input[type="submit"], .success-btn {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover, .success-btn:hover {
+            background-color: #4fd1ff;
+            color: #000;
+        }
+
+        /* Popup Modal */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .popup-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 25px;
+            width: 50%;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        .close {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .upload-btn-wrapper {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    </style>
+    <script>
+        function validate(formObj) {
+            if (formObj.t1.value.length == 0) {
+                alert("Please enter Notary details.");
+                formObj.t1.focus();
+                return false;
+            }
+            if (formObj.t2.value.length == 0) {
+                alert("Please enter PIN number.");
+                formObj.t2.focus();
+                return false;
+            }
+            if (formObj.t3.value.length == 0) {
+                alert("Please upload an eID document.");
+                formObj.t3.focus();
+                return false;
+            }
+            return true;
+        }
+
+        function openPopup() {
+            document.getElementById('popupModal').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popupModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('popupModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+	    <!-- Header Section -->
+		<header>
+			<div class="topcontainer">
+				<div class="logo-text">
+				<img src="{% static 'images/icon.png' %}" alt="Logo" class="logo">
+				<span class="id-text">ID</span><span class="vault-text">VAULT</span>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="{% url 'AddNotary' %}">Add</a></li>
+                        <li><a href="{% url 'DeleteNotary' %}">Delete</a></li>
+                        <li><a href="{% url 'ViewNotary' %}">View Notarization</a></li>
+                        <li><a href="{% url 'index' %}">Logout</a></li>
+					</ul>
+				</nav>
+			</div>
+			</header>
+</head>
+<body>
+<div class="container">
+    <h2>Add Notary Screen</h2>
+
+    {% if data %}
+    <div class="upload-btn-wrapper">
+        <button type="button" class="success-btn" onclick="openPopup()">Uploaded Successfully</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="popupModal" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h3>Document Hash</h3>
+            <p>{{ data|safe }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <form name="f1" method="post" action="{% url 'AddNotaryAction' %}" enctype="multipart/form-data" onsubmit="return validate(this);">
+        {% csrf_token %}
+
+        <label for="t1">Notary Details</label>
+        <textarea name="t1" id="t1" rows="6" placeholder="Enter Notary Details here..."></textarea>
+
+        <label for="t2">PIN Number</label>
+        <input type="text" name="t2" id="t2" placeholder="Enter PIN">
+
+        <label for="t3">Upload eID Document</label>
+        <input type="file" name="t3" id="t3">
+
+        <div style="text-align:center;">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
